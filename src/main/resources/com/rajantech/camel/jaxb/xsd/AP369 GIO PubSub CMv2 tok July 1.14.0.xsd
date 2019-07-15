@@ -1,0 +1,757 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace"
+   targetNamespace="upscm" xmlns:upscm="upscm">
+  <!-- 1.14.0.20180509 - added lop node with LopNr, LopUntSysNr, RteNa  -->
+  <!-- 1.14.0.20180521 - changed lop node's maxOccurs from "unbounded" to 1, added MsgHdr/MnfOrlInfSrcCd -->
+  <xsd:element name="PkgSt">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:MsgHdr"/>
+        <xsd:element ref="upscm:Smt" minOccurs="0"/>
+        <xsd:element ref="upscm:Shu" minOccurs="1" maxOccurs="1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  
+  
+  <xsd:element name="Cod" type="upscm:MnyTyp"/>
+  <xsd:element name="D2rCod" type="upscm:MnyTyp"/>
+  <xsd:element name="LdUnt" type="upscm:LdUntTyp"/>
+  <xsd:element name="OutLdUnt" type="upscm:LdUntTyp"/>
+  <xsd:element name="LstLegLdUnt" type="upscm:LdUntTyp"/> 
+  <xsd:element name="IptCod" type="upscm:MnyTyp"/>
+  <xsd:element name="SecUnt">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SecUntNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="SecUntMnmTe" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:complexType name="BpyTyp">
+    <xsd:sequence>
+      <xsd:element ref="upscm:Id" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="PesTyp">
+    <xsd:sequence>
+      <xsd:element name="Na" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="EmpIdNr" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="OgzTyp">
+    <xsd:sequence>
+      <xsd:element ref="upscm:CnyCd" minOccurs="0"/> <!-- Used for both Fac and Ogz -->
+      <xsd:element ref="upscm:OgzNr" minOccurs="0"/>
+      <xsd:element name="FacCnyCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element ref="upscm:FacLocNr" minOccurs="0"/>
+      <xsd:element ref="upscm:FacMnmTe" minOccurs="0"/>
+      <xsd:element name="FacDyrCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element ref="upscm:SrtTypCd" minOccurs="0"/>
+      <xsd:element name="SrtTypMnmTe" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SrtTypOcrNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element ref="upscm:SrtDt" minOccurs="0"/>
+      <xsd:element ref="upscm:SrtTs" minOccurs="0"/>
+      <xsd:element name="InBdgLocNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SvcPntDelLocNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ShuLocRlCgyCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="LdCrtDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="LdSvcTypCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="UsrNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute ref="upscm:DatSrcMnmTe"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="MnyTyp">
+    <xsd:sequence>
+      <xsd:element name="A" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="AcpPmtCgyCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="CodIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="CcyAlpCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="PymCd" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="DmnTyp">
+    <xsd:sequence>
+      <xsd:element ref="upscm:MsuMnmTe" minOccurs="0"/>
+      <xsd:element name="LenQy" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="WidQy" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="HtQy" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute ref="upscm:InfSrcCd"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="AdTyp">
+    <xsd:sequence>
+      <xsd:element name="AdNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="AdTypCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="AtnOfNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="BdgNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="BdgNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="ChnIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="CorRsnCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="CorRlvCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="CsfValSghCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element ref="upscm:CnyCd" minOccurs="0"/>
+      <xsd:element ref="upscm:CnySdvCd" minOccurs="0"/>
+      <xsd:element name="EnrIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="Al1Te" type="xsd:string" minOccurs="0"/>    <!-- This is correct -->
+      <xsd:element name="Al2Te" type="xsd:string" minOccurs="0"/>    <!-- This is correct -->
+      <xsd:element name="Al3Te" type="xsd:string" minOccurs="0"/>    <!-- This is correct -->
+      <xsd:element name="MunNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="MunSdvNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="NonFmtPslCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="PriPslCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SecPslCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StrCgyCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StrCgyTe" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StrNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StrPfxNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StrSufNa" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="StsDscTe" type="xsd:string" minOccurs="0"/>
+      <xsd:element ref="upscm:SecUnt" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="SecUntMnmTe" type="xsd:string" minOccurs="0"/> <!-- Deprecated -->
+      <xsd:element name="SecUntNr" type="xsd:string" minOccurs="0"/>    <!-- Deprecated -->
+      <xsd:element name="CtcPhnNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="CtcEmlTe" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="UdtIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="DpaPlnMtcIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="ValAtpIr" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="VrsCd" type="xsd:string" minOccurs="0"/>       <!-- Deprecated -->
+      <xsd:element name="AdRtgCsfCd" type="xsd:string" minOccurs="0"/>  <!-- This is correct -->
+      <xsd:element name="SvcPntDelLocNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="LocStpNr" type="xsd:string" minOccurs="0" />
+    </xsd:sequence>
+    <xsd:attribute ref="upscm:InfSrcCd"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="WgtTyp">
+    <xsd:sequence>
+      <xsd:element ref="upscm:MsuCd" minOccurs="0"/>
+      <xsd:element ref="upscm:MsuDscTe" minOccurs="0"/>
+      <xsd:element ref="upscm:MsuMnmTe" minOccurs="0"/>
+      <xsd:element ref="upscm:Qy" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute ref="upscm:InfDtTm"/>
+    <xsd:attribute ref="upscm:InfSrcCd"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="LdUntTyp">
+    <xsd:sequence>
+      <xsd:element ref="upscm:CrtDt" minOccurs="0"/>
+      <xsd:element ref="upscm:UtcTcfTmQy" minOccurs="0"/>
+      <xsd:element ref="upscm:OrgOgzCnyCd" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="upscm:OrgOgzNr" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="upscm:OrgSrtTypCd" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="upscm:DtnOgzCnyCd" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="upscm:DtnOgzNr" minOccurs="1" maxOccurs="1"/>
+      <xsd:element ref="upscm:DtnSrtTypCd" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="LdNa" type="xsd:string" minOccurs="0" />  
+      <xsd:element name="LdUntNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="LdUntTypCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="PrnRteNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="RteNr" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SvcTypCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="SrtBltNr" type="xsd:string" minOccurs="0" />
+      <xsd:element name="SrtBayNr" type="xsd:string" minOccurs="0" />
+    </xsd:sequence>
+    <xsd:attribute ref="upscm:RefDatDxnCd"/>
+  </xsd:complexType>
+  
+  <xsd:element name="MsgHdr">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MsgFmtNr" type="xsd:string"/>
+        <xsd:element name="MsgFmtVerNr" type="xsd:string"/>
+        <xsd:element name="MsgInfSrcCd" type="xsd:string"/>
+        <xsd:element name="MsgOidNr" type="xsd:string"/>
+        <xsd:element name="MsgTs" type="xsd:dateTime"/>
+        <xsd:element name="MsgEvtTs" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="FcsRulTe" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="RecTypCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SubRecTypCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="ShuDveNr" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="ExlStsCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="InfMgtSysInsTs" type="xsd:dateTime" minOccurs="0"/>
+        <xsd:element name="ShuLocRlCgyCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="MsgUplCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="MsgTgrInfSrcCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="MnfOrlInfSrcCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="LtMsgIr" type="xsd:boolean" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:RefDatDxnCd"/>
+    </xsd:complexType>
+  </xsd:element>
+
+
+  
+  <xsd:element name="Shu">
+    <xsd:complexType>
+      <xsd:sequence>
+
+        <xsd:element name="PkgTckNr" minOccurs="0" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute ref="upscm:RefTypCd"/>
+                <xsd:attribute ref="upscm:RefTypDscTe"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>      
+        <xsd:element name="SmtTckNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="PplShpTckNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="RtsTckNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="SmtLedPkgTckNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        
+        <xsd:element name="AcsPnt" type="upscm:AcsPntTyp" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="PrfAcsPnt" type="upscm:AcsPntTyp" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="AltAcsPnt" type="upscm:AcsPntTyp" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="HfpAcsPnt" type="upscm:AcsPntTyp" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="AcsPntLkrElgIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element ref="upscm:DelAcy" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element ref="upscm:XcpAcy" maxOccurs="1" minOccurs="0" />
+        <xsd:element ref="upscm:SycDelAcy" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element ref="upscm:FcsSrtAcy" maxOccurs="unbounded" minOccurs="0" />
+        <!-- Temporarily flattening out "InlPkgUdtAcy" into "InlPkgUdtAcyTe" until many instances of the former are no longer created -->
+        <xsd:element ref="upscm:InlPkgUdtAcy" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element name="InlPkgUdtAcyTe" type="xsd:string" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element ref="upscm:HzmAudAcy" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element ref="upscm:LdUntAcy" maxOccurs="1" minOccurs="0" />
+        <xsd:element ref="upscm:SnAcy" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element ref="upscm:Mvm" maxOccurs="unbounded" minOccurs="0" />
+        <xsd:element name="MnfCnsAd" type="upscm:AdTyp" minOccurs="0"/>
+        <xsd:element name="ShrAd" type="upscm:AdTyp" minOccurs="0"/>
+        <xsd:element name="MnfShrAd" type="upscm:AdTyp" minOccurs="0"/>
+        <xsd:element name="TpyDelAd" type="upscm:AdTyp" minOccurs="0" maxOccurs="2"/>
+        <xsd:element name="MnfPuAd" type="upscm:AdTyp" minOccurs="0"/>
+        <xsd:element name="CodIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="IptCodIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:Cod" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:D2rCod" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:IptCod" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="CmcIsdRelIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="CmcSdlElgIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="CmiSdlElgIr" type="xsd:boolean" minOccurs="0"/><!-- DEPRECATED - Remove on 2018/09/12 -->
+        <xsd:element name="DelSchIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Dmn" type="upscm:DmnTyp" minOccurs="0"/>
+        <xsd:element name="DclVlu" type="upscm:MnyTyp" minOccurs="0"/>
+        <xsd:element name="ExdOrgOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="ExdDtnOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="CmiOrgOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="CmiDtnOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="XptOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="IptOgz" type="upscm:OgzTyp" minOccurs="0"/>
+        <xsd:element name="HzmAcpAudIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="HzmTptScoIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="HzmIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="ItnHzmCrwAcsIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="LocAdMtcIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="LocElgIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Ni1AdlElgIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="OsySvcCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element ref="upscm:LdUnt" minOccurs="0"/>
+        <xsd:element ref="upscm:OutLdUnt" minOccurs="0"/>
+        <xsd:element ref="upscm:LstLegLdUnt" minOccurs="0"/>
+        <xsd:element name="PuDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:RglCmy" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="SddDt" type="xsd:date" minOccurs="0" />
+        <xsd:element name="SddTm" type="xsd:time" minOccurs="0" />
+        <xsd:element name="RglLvlCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="PmnIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="PuPym" type="upscm:MnyTyp" minOccurs="0"/>
+        <xsd:element name="SvcCmiDelDt" type="xsd:date" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="SvcCmiDelTm" type="xsd:time" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="SvcCboCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SvcTypCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="Shr" type="upscm:BpyTyp" minOccurs="0"/>
+        <xsd:element name="ShuVodIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="SpcHdlCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="SpcShpCsdCd" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="SpcShpCsdMnmTe" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="TckNrExpIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="TptScoQy" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="WknDelElgIr" type="xsd:boolean" minOccurs="0"/>
+        <xsd:element name="Awt" type="upscm:WgtTyp" minOccurs="0"/>
+        <xsd:element name="Dw" type="upscm:WgtTyp" minOccurs="0"/>
+        <xsd:element name="HzmTypCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UpgSvcTypCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="OrgCmiRcdDt" type="xsd:date" minOccurs="0"/>
+        <xsd:element name="PlnDelDtTm" type="upscm:DelDtTmTyp" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element name="FnaMlDelDtTm" type="upscm:DelDtTmTyp" minOccurs="0" maxOccurs="unbounded"/> 
+        <xsd:element name="UloAcyDtTm" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UloAcyUtcTcfTmQy" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <!-- <xsd:element name="XpaWknSvcElgIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>-->
+        <xsd:element name="WknSvcTryIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="FloIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="RteHinNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="LdHinNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="RtsSvcIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        
+        <xsd:element name="CnsAd" minOccurs="0" maxOccurs="2">
+          <xsd:complexType>
+            <xsd:complexContent>
+              <xsd:extension base="upscm:AdTyp">
+                <xsd:sequence>
+                  <xsd:element name="XpaWknSvcIr" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                </xsd:sequence>
+              </xsd:extension>
+            </xsd:complexContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="CurPrcFacOgz" minOccurs="0">
+          <xsd:complexType>
+            <xsd:complexContent>
+              <xsd:extension base="upscm:OgzTyp">
+                <xsd:sequence>
+                  <xsd:element name="NxtEvtDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="NxtEvtTm" type="xsd:time" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="NxtEvtOgzNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="NxtEvtCnyCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="NxtEvtSrtTypCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                  <xsd:element name="WstNr" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="WstNa" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="SnNr" type="xsd:string" minOccurs="0"/>
+                  <xsd:element name="SrrNr" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+              </xsd:extension>
+            </xsd:complexContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Svc" minOccurs="0">
+          <xsd:complexType>
+            <xsd:simpleContent>
+              <xsd:extension base="xsd:string">
+                <xsd:attribute ref="upscm:InfAthCd"/>
+              </xsd:extension>
+            </xsd:simpleContent>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ShuElg">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ElgLvlCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="UsrNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+          </xsd:complexType>
+        </xsd:element>
+        <!-- NOTE: The following structure may be discontinued in the future. TBD. -->
+        <xsd:element name="Fcs" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="FcsRulTe" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element ref="upscm:PkgLocRlCd" minOccurs="1" maxOccurs="1"/>
+              <xsd:element ref="upscm:OgzCnyCd" minOccurs="1" maxOccurs="1"/>
+              <xsd:element ref="upscm:OgzNr" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <!---->
+        <xsd:element name="Flo" minOccurs="0" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="FloTypCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="PriOgz" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:complexContent>
+                    <xsd:extension base="upscm:OgzTyp">
+                      <xsd:sequence>
+		                <xsd:element name="AltOgz" minOccurs="0" maxOccurs="unbounded">
+		                  <xsd:complexType>
+	                        <xsd:complexContent>
+		                      <xsd:extension base="upscm:OgzTyp">
+		                        <xsd:sequence>
+		                          <xsd:element name="RnkNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		                        </xsd:sequence>
+			                  </xsd:extension>
+			                </xsd:complexContent>
+			              </xsd:complexType>
+		                </xsd:element>
+                      </xsd:sequence>
+                    </xsd:extension>
+                  </xsd:complexContent>
+              	</xsd:complexType>
+              </xsd:element>
+              <!--
+              <xsd:element name="PriOgz" type="upscm:OgzTyp" minOccurs="0" maxOccurs="1"/>
+              <xsd:element name="AltOgz" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:complexContent>
+                    <xsd:extension base="upscm:OgzTyp">
+                      <xsd:sequence>
+                        <xsd:element name="RnkNr" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                      </xsd:sequence>
+                    </xsd:extension>
+                  </xsd:complexContent>
+                </xsd:complexType>
+              </xsd:element>
+               -->
+            </xsd:sequence>
+            <xsd:attribute ref="upscm:InfSrcCd"/>
+          </xsd:complexType>
+        </xsd:element>
+		<xsd:element name="Lop" minOccurs="0" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:sequence>
+			  <xsd:element name="LopNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			  <xsd:element name="LopUntSysNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			  <xsd:element name="RteNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+			</xsd:complexType>
+		 </xsd:element>			  
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="DelAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MsgUplCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element ref="upscm:OrgOgzCnyCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:OrgOgzNr" minOccurs="0" maxOccurs="1" /> 
+        <xsd:element name="DelSraCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="RslCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="ShrIdInfTe" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="ShrNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="DvrNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="DvrEmpIdNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="DvrFupReqIr" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="LdUntNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="LopNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="CnsNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="MunNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="MunSdvNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:SecUnt" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="CtgIr" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="DelAtpCd" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpStrNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpStrNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpStrPfxNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpStrSufNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpStrTypCd" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpPriPslCd" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="StpSecPslCd" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="SigLstNa" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="XcpAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:AcyDt" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="upscm:AcyTm" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:UtcTcfTmQy" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:OgzCnyCd" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:OgzNr" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:SrtTypCd" minOccurs="0" maxOccurs="1"/>
+        
+        <xsd:element ref="upscm:Dcv" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:Rpt" minOccurs="0" maxOccurs="1"/>
+        <!-- DEPRECATED - Remove on 2018/09/08 -->
+        <xsd:element name="RptOgzCnyCd" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="RptOgzNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        <!---->
+        
+        <xsd:element ref="upscm:FacCnyCd" maxOccurs="1" minOccurs="0" />
+        <xsd:element ref="upscm:FacMnmTe" maxOccurs="1" minOccurs="0" />
+        <xsd:element ref="upscm:FacLocNr" maxOccurs="1" minOccurs="0" />
+        <xsd:element name="XcpStsCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="XcpSraCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="XcpStsRlvCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="XcpIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element name="UsrNr" type="xsd:string" minOccurs="0" />          
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="SycDelAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="IntHldElgIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element name="IntHldElgTypCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="TpyDelSvcCd" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="LdUntAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:AcyDt" minOccurs="1" maxOccurs="1"/>
+        <xsd:element ref="upscm:AcyTm" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:UtcTcfTmQy" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:OgzCnyCd" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:OgzNr" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:SrtTypCd" minOccurs="1" maxOccurs="1"/>
+        
+        <xsd:element ref="upscm:Dcv" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:Rpt" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:Rpy" minOccurs="0" maxOccurs="1"/>
+                        
+        <xsd:element name="UldAcyDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UldAcyTm" type="xsd:time" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UldAcyUtcTcfTmQy" type="xsd:decimal" minOccurs="0" maxOccurs="1"/>
+        
+        <xsd:element ref="upscm:AcyTypCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:StsCd" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:SraCd" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UsrNr" type="xsd:string" minOccurs="0" />
+        <xsd:element ref="upscm:PkgLocRlCd" minOccurs="0"/>   
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="SnAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:OgzCnyCd" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:OgzNr" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:SrtTypCd" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:AcyDt" minOccurs="1" maxOccurs="1" />
+        <xsd:element ref="upscm:AcyTm" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:AcyTypCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:UtcTcfTmQy" minOccurs="0" maxOccurs="1"/>
+        <xsd:element ref="upscm:StsCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:SraCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:PkgLocRlCd" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="LdCrtDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="SnCpMthCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="UsrNr" type="xsd:string" minOccurs="0" />
+        <xsd:element ref="upscm:SrtDt" minOccurs="0" />
+        <xsd:element name="SrtSttTs" type="xsd:dateTime" minOccurs="0" />  
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="FcsSrtAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="FcsSrtDtTm" type="xsd:dateTime" minOccurs="0" />
+        <xsd:element name="FcsSrtCd" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="InlPkgUdtAcy"><!-- DEPRECATED, remove after 2018/08/01 -->
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="InlPkgUdtStsCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="InlPkgUdtSraCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="SraDtTm" type="xsd:dateTime" maxOccurs="1" minOccurs="0" />
+        <xsd:element ref="upscm:AcyTypCd" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="HzmAudAcy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="HzmStsChnIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element name="AudStsCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="AudStsTs" type="xsd:dateTime" minOccurs="0" />
+        <xsd:element name="AurUsrNr" type="xsd:string" minOccurs="0" />
+        <xsd:element name="AirTptAudPsxIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element name="AirTptAudOcrIr" type="xsd:boolean" minOccurs="0" />
+        <xsd:element name="CgoArcOlyIr" type="xsd:boolean" maxOccurs="1" minOccurs="0" />
+        <xsd:element name="TptMdeCd" type="xsd:string" minOccurs="0" />
+        <xsd:element name="TunResCd" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:attribute ref="upscm:DatCpMthCgyCd"/>
+      <xsd:attribute ref="upscm:DatCpInfSrcCd"/>
+      <xsd:attribute ref="upscm:InfSrcCd"/>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="Ctm">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="CogNr" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="DtyTypCd" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="Id">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="AcCnyCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="AcNr" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="Smt">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:Ctm" minOccurs="0"/>
+        <xsd:element name="DclVlu" type="upscm:MnyTyp" minOccurs="0"/>
+        <xsd:element name="SmtRefNr" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="ShuQy" type="xsd:integer" minOccurs="0"/>
+        <xsd:element name="SmtTypCd" type="xsd:string" minOccurs="0"/>
+        <xsd:element ref="upscm:Cod" minOccurs="1"/>
+        <xsd:element ref="upscm:IptCod" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="RglCmy">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:Qy" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="TptCgyCd" type="xsd:string" minOccurs="0" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:complexType name="DelDtTmTyp">
+    <xsd:sequence>
+      <xsd:element name="SddDt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="SddTm" type="xsd:time" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="RddDt" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:date">
+              <xsd:attribute name="RliIdxPr"/>
+              <xsd:attribute ref="upscm:ErrCd"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RddTm" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:time">
+              <xsd:attribute name="RliIdxPr"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RddCclMthCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="RcdDt" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:date">
+              <xsd:attribute name="RliIdxPr"/>
+              <xsd:attribute ref="upscm:ErrCd"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RcdTm" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:time">
+              <xsd:attribute name="RliIdxPr"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RcdCclMthCd" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:element name="Mvm">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="upscm:OrgOgzCnyCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:OrgOgzNr" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:DtnOgzCnyCd" minOccurs="0" maxOccurs="1" />
+        <xsd:element ref="upscm:DtnOgzNr" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="MvmDt" type="xsd:date" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="MnmNr" type="xsd:string" minOccurs="0" maxOccurs="1" /> <!-- DEPRECATED, remove after 2018/08/01 -->
+        <xsd:element name="MvmNr" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:complexType name="AcsPntTyp">
+    <xsd:sequence>
+      <xsd:element name="TypCd" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="IdNr" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="OgzDtTmTyp">
+    <xsd:sequence>
+      <xsd:element name="Dt" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="Tm" type="xsd:time" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="upscm:UtcTcfTmQy" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="upscm:OgzCnyCd" minOccurs="0" maxOccurs="1"/>
+      <xsd:element ref="upscm:OgzNr" minOccurs="0" maxOccurs="1"/>
+    <xsd:element ref="upscm:SrtTypCd" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:element name="Qy" type="xsd:decimal"/>
+  <xsd:element name="UtcTcfTmQy" type="xsd:string"/>
+  <xsd:element name="CnyCd" type="xsd:string"/>
+  <xsd:element name="OgzNr" type="xsd:string"/>
+  <xsd:element name="OgzCnyCd" type="xsd:string"/>
+  <xsd:element name="FacCnyCd" type="xsd:string"/>
+  <xsd:element name="FacLocNr" type="xsd:string"/>
+  <xsd:element name="FacMnmTe" type="xsd:string"/>
+  <xsd:element name="SrtTypCd" type="xsd:string"/>
+  <xsd:element name="SrtDt" type="xsd:date"/>
+  <xsd:element name="SrtTs" type="xsd:dateTime"/>
+  <xsd:element name="CrtDt" type="xsd:date"/>
+  <xsd:element name="OrgOgzNr" type="xsd:string"/>
+  <xsd:element name="OrgOgzCnyCd" type="xsd:string"/>
+  <xsd:element name="OrgSrtTypCd" type="xsd:string"/>
+  <xsd:element name="DtnOgzNr" type="xsd:string"/>
+  <xsd:element name="DtnOgzCnyCd" type="xsd:string"/>
+  <xsd:element name="DtnSrtTypCd" type="xsd:string"/>
+  <xsd:element name="AcyTypCd" type="xsd:string"/>
+  <xsd:element name="AcyDt" type="xsd:date"/>
+  <xsd:element name="AcyTm" type="xsd:time"/>
+  <xsd:element name="StsCd" type="xsd:string"/>
+  <xsd:element name="SraCd" type="xsd:string"/>
+  <xsd:element name="PkgLocRlCd" type="xsd:string"/>
+  <xsd:element name="CnySdvCd" type="xsd:string"/>
+  <xsd:element name="MsuCd" type="xsd:string"/>
+  <xsd:element name="MsuDscTe" type="xsd:string"/>
+  <xsd:element name="MsuMnmTe" type="xsd:string"/>
+  <xsd:element name="Dcv" type="upscm:OgzDtTmTyp"/>
+  <xsd:element name="Rpt" type="upscm:OgzDtTmTyp"/>
+  <xsd:element name="Rpy" type="upscm:OgzDtTmTyp"/>
+  
+  <xsd:attribute name="DatCpMthCgyCd"/>
+  <xsd:attribute name="DatCpInfSrcCd"/>
+  <xsd:attribute name="DatSrcMnmTe"/>
+  <xsd:attribute name="ErrCd"/>
+  <xsd:attribute name="InfAthCd"/>
+  <xsd:attribute name="InfDtTm"/>
+  <xsd:attribute name="InfSrcCd"/>
+  <xsd:attribute name="RefDatDxnCd"/>
+  <xsd:attribute name="RefTypCd"/>
+  <xsd:attribute name="RefTypDscTe"/>
+  
+</xsd:schema>

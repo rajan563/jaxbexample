@@ -159,6 +159,25 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!--  <plugin>
+			 <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>jaxb2-maven-plugin</artifactId> 
+				<version>1.5</version>
+				 <executions> <execution>
+				  <goals> <goal>xjc</goal> 
+				</goals> 
+				</execution>
+				 </executions> 
+				 <configuration> 
+				 <schemaDirectory>${project.basedir}/src/main/resources/xsd</schemaDirectory> 
+				<packageName>com.rajantech.camel.jaxb.model</packageName> 
+				<outputDirectory>${project.basedir}/src/main/java</outputDirectory> 
+				</configuration>
+				
+			 </plugin> -->
+			
+			
 		</plugins>
 	</build>
 	

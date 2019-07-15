@@ -3,7 +3,7 @@ package com.rajantech.camel.jaxb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
+/** 
 * <h1>HeatGioIngestionApplication</h1> 
 * The HeatGioIngestionApplication is a SpringBoot Class.
 * @SpringBootApplication is a convenience annotation that adds all of the following:
